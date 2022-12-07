@@ -83,7 +83,7 @@ export default function AppRegisterComponent() {
             />
             <label>Confirm Password</label>
           </div>
-          <div class="checkbox mb-3">
+          <div className="checkbox mb-3">
             <label>
               <input
                 type="checkbox"

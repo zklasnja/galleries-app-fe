@@ -5,24 +5,41 @@ import Galleries from "../services/Galleries";
 import { selectAllGalleries } from "../store/galleries/slice";
 import { selectSearchterm } from "../store/galleries/selector";
 import AppGalleryRow from "./AppGalleryRow";
+import Footer from "../partials/Footer";
+import { useLocation } from "react-router-dom";
 
 export default function AppGalleriesComponent() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const galleriesData = useSelector(selectAllGalleries);
   const searchTerm = useSelector(selectSearchterm);
-  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   const handleGalleries = async (params) => {
-    const response = await Galleries.getAll();
-    dispatch(getAll(response));
+    if (location.pathname === "/my-galleries") {
+      const response = await Galleries.getAuthorGalleries(params);
+      dispatch(getAll(response.data));
+    } else {
+      const response = await Galleries.getAll(params);
+      dispatch(getAll(response));
+    }
   };
 
   useEffect(() => {
     handleGalleries({
-      page,
+      perPage,
       searchTerm,
     });
-  }, [page, searchTerm]);
+  }, [perPage, searchTerm]);
+
+  const handleNextPage = () => {
+    if (perPage === galleriesData.perPage) {
+      return;
+    } else {
+      setPerPage(perPage + 10);
+    }
+  };
+
   return (
     <div>
       <main className="container">
@@ -38,24 +55,10 @@ export default function AppGalleriesComponent() {
           <p>There are no result found</p>
         )}
       </main>
-
-      <footer className="text-muted py-5">
-        <div className="container">
-          <p className="float-end mb-1">
-            <a href="#">Back to top</a>
-          </p>
-          <p className="mb-1">
-            Album example is &copy; Bootstrap, but please download and customize
-            it for yourself!
-          </p>
-          <p className="mb-0">
-            New to Bootstrap? <a href="/">Visit the homepage</a> or read our{" "}
-            <a href="../getting-started/introduction/">getting started guide</a>
-            .
-          </p>
-        </div>
-      </footer>
-
+      <button className="btn btn-blue" onClick={handleNextPage}>
+        Load more
+      </button>
+      <Footer />
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     </div>
   );

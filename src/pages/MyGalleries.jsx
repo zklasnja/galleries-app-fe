@@ -1,3 +1,9 @@
+import AppGalleriesComponent from "../components/AppGalleriesComponent";
+
 export default function MyGalleries() {
-  return <div>My Galleries</div>;
+  return (
+    <div>
+      <AppGalleriesComponent />
+    </div>
+  );
 }

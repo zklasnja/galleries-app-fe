@@ -16,6 +16,7 @@ class GalleriesService {
       { params },
       this.headers
     );
+
     return response.data;
   }
 
@@ -26,6 +27,7 @@ class GalleriesService {
         request,
         this.headers
       );
+
       return newRequest;
     } catch (error) {
       alert(
@@ -62,6 +64,7 @@ class GalleriesService {
         },
         this.headers
       );
+
       return newRequest;
     } catch (error) {
       alert(
@@ -78,6 +81,17 @@ class GalleriesService {
       `/delete-gallery/${id}`,
       this.headers
     );
+
+    return request;
+  }
+
+  async getAuthorGalleries(params) {
+    const request = await this.axiosInstance.get(
+      "/my-galleries",
+      { params },
+      this.headers
+    );
+
     return request;
   }
 }

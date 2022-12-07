@@ -1,25 +1,45 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Galleries from "../services/Galleries";
-import Images from "../services/Images";
 
 export default function CreateGalleryComponent() {
   const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [addUrl, setAddUrl] = useState("");
+  const [inputList, setInputList] = useState([""]);
 
   const handleCreateGallery = async (e) => {
     e.preventDefault();
     try {
-      const response = await Galleries.add({ name, description });
+      const response = await Galleries.add({
+        name,
+        description,
+        urls: inputList,
+      });
 
-      await Images.add({ url: addUrl, gallery_id: response.data.id });
-      history.push("/my-galleries");
+      if (response.data !== undefined) {
+        history.push("/my-galleries");
+      }
     } catch (error) {
       alert(error);
     }
   };
+  const handleInputChange = (e, index) => {
+    const list = [...inputList];
+    list[index] = e.target.value;
+    setInputList(list);
+  };
+
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  const handleAddClick = () => {
+    setInputList([...inputList, ...inputList]);
+  };
+
   return (
     <div className="body-signin">
       <div className="form-signin w-100 m-auto">
@@ -43,16 +63,47 @@ export default function CreateGalleryComponent() {
             ></textarea>
             <label>Description</label>
           </div>
-          <div className="form-floating">
+
+          {/* <div className="form-floating">
             <input
               type="text"
               className="form-control"
               onChange={({ target }) => setAddUrl(target.value)}
             />
-            <label>Image text</label>
-          </div>
+            <label>Image url</label>
+          </div> */}
+          {inputList.map((x, index) => {
+            return (
+              <div key={index} className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => handleInputChange(e, index)}
+                />
+                <label>Image url</label>
+                <div className="m-1">
+                  {inputList.length !== 1 && (
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleRemoveClick(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                  {inputList.length - 1 === index && (
+                    <button
+                      className="w-100 btn btn-secondary m-1"
+                      onClick={handleAddClick}
+                    >
+                      Add another url
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
 
-          <button className="w-100 btn btn-lg btn-primary" type="submit">
+          <button className="w-100 btn btn-lg btn-primary m-1" type="submit">
             Create
           </button>
           <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>

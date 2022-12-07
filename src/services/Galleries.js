@@ -27,16 +27,17 @@ class GalleriesService {
         request,
         this.headers
       );
-
-      return newRequest;
-    } catch (error) {
-      alert(
-        JSON.stringify([
-          { Error: error.message },
-          { Message: error.response.data.message },
-        ])
-      );
-    }
+      if (newRequest) {
+        return newRequest;
+      } else {
+        alert(
+          JSON.stringify([
+            { Error: newRequest.message },
+            { Message: newRequest.response.data.message },
+          ])
+        );
+      }
+    } catch (error) {}
   }
 
   async get(id) {

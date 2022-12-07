@@ -42,6 +42,7 @@ export default function AppGalleriesComponent() {
 
   return (
     <div>
+      {console.log(galleriesData)}
       <main className="container">
         {galleriesData?.data?.length ? (
           galleriesData?.data?.map((gallery) =>

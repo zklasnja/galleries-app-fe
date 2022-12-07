@@ -27,13 +27,13 @@ class GalleriesService {
         request,
         this.headers
       );
-      if (newRequest) {
+      if (newRequest.status === 200) {
         return newRequest;
       } else {
         alert(
           JSON.stringify([
             { Error: newRequest.message },
-            { Message: newRequest.response.data.message },
+            { Message: newRequest.response.data.errors },
           ])
         );
       }
@@ -42,7 +42,7 @@ class GalleriesService {
 
   async get(id) {
     const request = await this.axiosInstance.get(
-      `/galleries/${id}`,
+      `/gallery/${id}`,
       this.headers
     );
     if (request) {
@@ -54,15 +54,7 @@ class GalleriesService {
     try {
       const newRequest = await this.axiosInstance.patch(
         `edit-gallery/${id}`,
-        {
-          brand: request.brand,
-          engine: request.engine,
-          is_automatic: request.is_automatic,
-          max_speed: request.max_speed,
-          model: request.model,
-          number_of_doors: request.number_of_doors,
-          year: request.year,
-        },
+        {},
         this.headers
       );
 

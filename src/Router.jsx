@@ -6,6 +6,7 @@ import CreateGallery from "./pages/CreateGallery";
 import AppLogin from "./pages/AppLogin";
 import MyGalleries from "./pages/MyGalleries";
 import AppRegister from "./pages/AppRegister";
+import SingleGallery from "./pages/SingleGallery";
 
 const AuthRoute = ({ children, ...rest }) => {
   const { user } = useAuth();
@@ -32,6 +33,9 @@ export default function Router() {
       </AuthRoute>
       <AuthRoute path="/my-galleries">
         <MyGalleries />
+      </AuthRoute>
+      <AuthRoute path="/gallery/:id">
+        <SingleGallery />
       </AuthRoute>
       <GuestRoute path="/login">
         <AppLogin />

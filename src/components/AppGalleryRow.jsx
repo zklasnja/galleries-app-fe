@@ -1,6 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function AppGalleryRow({
   id,
@@ -10,9 +9,6 @@ export default function AppGalleryRow({
   user,
   created_at,
 }) {
-  const history = useHistory();
-  const dispath = useDispatch();
-
   return (
     <div>
       <div className="album py-5 bg-light">
@@ -24,7 +20,7 @@ export default function AppGalleryRow({
                   className="bd-placeholder-img card-img-top"
                   width="100%"
                   height="225"
-                  src={images.length ? images[0].urls : "No image"}
+                  src={images.length ? images[0].urls : ""}
                   role="img"
                   aria-label="Placeholder: Thumbnail"
                   preserveAspectRatio="xMidYMid slice"
@@ -42,7 +38,7 @@ export default function AppGalleryRow({
                         type="button"
                         className="btn btn-sm btn-outline-secondary"
                       >
-                        View
+                        <Link to={`/gallery/${id}`}>View</Link>
                       </button>
                       <button
                         type="button"

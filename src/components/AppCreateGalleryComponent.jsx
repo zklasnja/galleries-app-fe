@@ -64,14 +64,6 @@ export default function CreateGalleryComponent() {
             <label>Description</label>
           </div>
 
-          {/* <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              onChange={({ target }) => setAddUrl(target.value)}
-            />
-            <label>Image url</label>
-          </div> */}
           {inputList.map((x, index) => {
             return (
               <div key={index} className="form-floating">

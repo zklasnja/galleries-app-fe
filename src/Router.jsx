@@ -32,10 +32,13 @@ export default function Router() {
         <CreateGallery />
       </AuthRoute>
       <AuthRoute path="/my-galleries">
-        <MyGalleries />
+        <AppGallery />
       </AuthRoute>
-      <AuthRoute path="/gallery/:id">
+      <Route path="/gallery/:id">
         <SingleGallery />
+      </Route>
+      <AuthRoute path="/authors/:id">
+        <AppGallery />
       </AuthRoute>
       <GuestRoute path="/login">
         <AppLogin />

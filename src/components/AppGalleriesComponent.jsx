@@ -33,31 +33,28 @@ export default function AppGalleriesComponent() {
   }, [perPage, searchTerm]);
 
   const handleNextPage = () => {
-    if (perPage === galleriesData.perPage) {
-      return;
-    } else {
-      setPerPage(perPage + 10);
-    }
+    setPerPage(perPage + 10);
   };
-
   return (
     <div>
-      <main className="container">
-        {galleriesData?.data?.length ? (
-          galleriesData?.data?.map((gallery) =>
-            gallery?.images?.length ? (
-              <AppGalleryRow key={gallery.id} {...gallery} />
-            ) : (
-              ""
-            )
+      {galleriesData?.data?.length ? (
+        galleriesData?.data?.map((gallery) =>
+          gallery?.images?.length ? (
+            <AppGalleryRow key={gallery.id} {...gallery} />
+          ) : (
+            ""
           )
-        ) : (
-          <p>There are no result found</p>
-        )}
-      </main>
-      <button className="btn btn-blue" onClick={handleNextPage}>
-        Load more
-      </button>
+        )
+      ) : (
+        <p>There are no result found</p>
+      )}
+      {galleriesData?.per_page <= galleriesData?.total ? (
+        <button className="btn btn-blue btn-secondary" onClick={handleNextPage}>
+          Load more
+        </button>
+      ) : (
+        ""
+      )}
       <Footer />
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     </div>

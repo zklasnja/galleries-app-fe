@@ -21,23 +21,24 @@ export default function SingleGallery() {
   }, [id]);
   return (
     <div>
-      <div className="card-body">
-        <h3 className="fw-light">{gallery.name}</h3>
-        <p className="lead text-muted">{gallery.description}</p>
-        <p className="card-text">
-          {first_name} {last_name}
-        </p>
-        <div className="d-flex justify-content-between align-items-center">
-          <small className="text-muted">{gallery.created_at}</small>
+      <section class="py-1 text-center">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{gallery.name}</h1>
+            <p class="lead text-muted">{gallery.description}</p>
+            <p className="card-text">
+              {first_name} {last_name}
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
       {gallery?.images?.map((image) => (
         <div key={image.id} className="album py-5 bg-light">
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               <div className="col">
-                <div className="card shadow-sm">
+                <div className="card shadow-sm ">
                   <SingleGalleryImage key={image.id} image={image} />
                 </div>
               </div>

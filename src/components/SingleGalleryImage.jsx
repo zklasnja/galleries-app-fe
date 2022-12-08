@@ -4,7 +4,7 @@ export default function SingleGalleryImage({ image }) {
   return (
     <div>
       <img
-        className="bd-placeholder-img card-img-top p-3"
+        className="align-self-center p-3"
         width="100%"
         height="225"
         src={image.urls}

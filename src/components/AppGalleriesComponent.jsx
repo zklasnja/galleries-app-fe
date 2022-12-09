@@ -6,18 +6,22 @@ import { selectAllGalleries } from "../store/galleries/slice";
 import { selectSearchterm } from "../store/galleries/selector";
 import AppGalleryRow from "./AppGalleryRow";
 import Footer from "../partials/Footer";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function AppGalleriesComponent() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const { id } = useParams();
   const galleriesData = useSelector(selectAllGalleries);
   const searchTerm = useSelector(selectSearchterm);
   const [perPage, setPerPage] = useState(10);
 
   const handleGalleries = async (params) => {
     if (location.pathname === "/my-galleries") {
-      const response = await Galleries.getAuthorGalleries(params);
+      const response = await Galleries.getMyGalleries(params);
+      dispatch(getAll(response.data));
+    } else if (location.pathname === `/authors/${id}`) {
+      const response = await Galleries.getAuthorsGalleries(params, id);
       dispatch(getAll(response.data));
     } else {
       const response = await Galleries.getAll(params);

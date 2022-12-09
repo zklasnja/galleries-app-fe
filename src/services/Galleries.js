@@ -78,12 +78,23 @@ class GalleriesService {
     return request;
   }
 
-  async getAuthorGalleries(params) {
+  async getMyGalleries(params) {
     const request = await this.axiosInstance.get(
       "/my-galleries",
       { params },
       this.headers
     );
+
+    return request;
+  }
+
+  async getAuthorsGalleries(params, id) {
+    const request = await this.axiosInstance.get(
+      `/authors/${id}`,
+      { params },
+      this.headers
+    );
+    console.log(params);
 
     return request;
   }

@@ -78,6 +78,7 @@ export default function CreateGalleryComponent() {
                   {inputList.length !== 1 && (
                     <button
                       className="btn btn-secondary"
+                      type="button"
                       onClick={() => handleRemoveClick(index)}
                     >
                       Remove
@@ -86,6 +87,7 @@ export default function CreateGalleryComponent() {
                   {inputList.length - 1 === index && (
                     <button
                       className="w-100 btn btn-secondary m-1"
+                      type="button"
                       onClick={handleAddClick}
                     >
                       Add another url

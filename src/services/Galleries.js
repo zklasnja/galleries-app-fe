@@ -94,8 +94,6 @@ class GalleriesService {
       { params },
       this.headers
     );
-    console.log(params);
-
     return request;
   }
 }

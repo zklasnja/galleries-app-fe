@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAllComments, getAll } from "../store/comments/slice";
 import SingleGalleryImage from "../components/SingleGalleryImage";
 import CommentsComponent from "../components/CommentsComponent";
+import AddCommentComponent from "../components/AddCommentComponent";
 import Galleries from "../services/Galleries";
 import Comments from "../services/Comments";
 
 export default function SingleGallery() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const commentsData = useSelector(selectAllComments);
   const [gallery, setGallery] = useState([""]);
   const [first_name, setFirst_name] = useState("");
   const [last_name, setLast_name] = useState("");
-  const [comments, setComments] = useState([""]);
 
   const handleSingleGallery = async (id) => {
     const response = await Galleries.get(id);
@@ -18,12 +22,13 @@ export default function SingleGallery() {
     setGallery(response);
     setFirst_name(response.user.first_name);
     setLast_name(response.user.last_name);
-    setComments(commentsReponse);
+    dispatch(getAll(commentsReponse.data));
   };
 
   useEffect(() => {
     handleSingleGallery(id);
   }, [id]);
+
   return (
     <div>
       <section className="py-1 text-center">
@@ -52,9 +57,12 @@ export default function SingleGallery() {
         </div>
       ))}
       <div>
-        {comments?.map((comment) => (
+        {commentsData?.map((comment) => (
           <CommentsComponent key={comment.id} {...comment} />
         ))}
+      </div>
+      <div>
+        <AddCommentComponent id={id} />
       </div>
     </div>
   );

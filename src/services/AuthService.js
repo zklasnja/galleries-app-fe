@@ -97,6 +97,15 @@ class AuthService {
       }
     } catch (error) {}
   }
+
+  async me() {
+    try {
+      let response = await this.axiosInstance.get("/me");
+      if (response) {
+        return response;
+      }
+    } catch (error) {}
+  }
 }
 
 export const authService = new AuthService();

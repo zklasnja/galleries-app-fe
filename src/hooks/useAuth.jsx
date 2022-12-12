@@ -1,6 +1,6 @@
 import { authService } from "../services/AuthService";
 import { useHistory } from "react-router-dom";
-import { setToken, setUser } from "../store/user/slice";
+import { setToken, setUser, setOnlyUser } from "../store/user/slice";
 import { selectUserData } from "../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -44,6 +44,13 @@ export default function useAuth() {
     }
   };
 
+  const handleGetUserData = async (data) => {
+    try {
+      const response = await authService.me();
+      dispatch(setOnlyUser(response.data));
+    } catch (error) {}
+  };
+
   const handleGetItemFromLS = (value) => {
     return localStorage.getItem(value);
   };
@@ -54,5 +61,6 @@ export default function useAuth() {
     logout: handleLogout,
     refresh: handleRefreshToken,
     register: handleRegister,
+    getUser: handleGetUserData,
   };
 }

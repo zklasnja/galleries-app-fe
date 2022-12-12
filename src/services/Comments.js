@@ -16,14 +16,14 @@ class CommentsService {
       this.headers
     );
 
-    return response.data;
+    return response;
   }
 
-  async add(request) {
+  async add(id, newComment) {
     try {
       const newRequest = await this.axiosInstance.post(
-        `/gallery/${request.id}/comments`,
-        request,
+        `/gallery/${id}/comments`,
+        newComment,
         this.headers
       );
       if (newRequest.status === 200) {
@@ -37,6 +37,15 @@ class CommentsService {
         );
       }
     } catch (error) {}
+  }
+
+  async delete(gId, cId) {
+    const request = await this.axiosInstance.delete(
+      `/gallery/${gId}/comments/${cId}`,
+      this.headers
+    );
+
+    return request;
   }
 }
 

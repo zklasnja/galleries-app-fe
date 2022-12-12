@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../store/galleries/slice";
+import { getAll, selectAllGalleries } from "../store/galleries/slice";
 import Galleries from "../services/Galleries";
-import { selectAllGalleries } from "../store/galleries/slice";
 import { selectSearchterm } from "../store/galleries/selector";
 import AppGalleryRow from "./AppGalleryRow";
 import Footer from "../partials/Footer";

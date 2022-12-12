@@ -37,11 +37,22 @@ export const userSlice = createSlice({
       state.created_at = payload.user.created_at;
       state.updated_at = payload.user.updated_at;
       state.token = payload.authorisation.token;
+      console.log(payload);
+    },
+    setOnlyUser: (state, { payload }) => {
+      state.first_name = payload.user.first_name;
+      state.last_name = payload.user.last_name;
+      state.email = payload.user.email;
+      state.id = payload.user.id;
+      state.created_at = payload.user.created_at;
+      state.updated_at = payload.user.updated_at;
     },
   },
 });
 
-export const { toLogin, logout, setToken, toRegister, setUser } =
+export const { toLogin, logout, setToken, toRegister, setUser, setOnlyUser } =
   userSlice.actions;
+
+export const selectUser = (state) => state.user;
 
 export default userSlice.reducer;

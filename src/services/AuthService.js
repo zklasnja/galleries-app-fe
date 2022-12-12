@@ -6,6 +6,10 @@ class AuthService {
     this.axiosInstance = httpService.axiosInstance;
     this.setAxiosAuthorisationHeader();
     this.refreshed = false;
+    this.runInterceptor();
+  }
+
+  runInterceptor() {
     this.axiosInstance.interceptors.response.use(
       (response) => response,
       async (error) => {
@@ -85,6 +89,8 @@ class AuthService {
   async logout() {
     try {
       const response = await this.axiosInstance.post("/logout");
+      localStorage.removeItem("token");
+      window.location.reload();
       return response;
     } catch (error) {}
   }

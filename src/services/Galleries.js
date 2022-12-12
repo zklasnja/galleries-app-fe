@@ -57,7 +57,6 @@ class GalleriesService {
         request,
         this.headers
       );
-      console.log(request);
 
       return newRequest;
     } catch (error) {

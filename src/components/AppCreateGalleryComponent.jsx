@@ -20,9 +20,7 @@ export default function CreateGalleryComponent() {
       if (response.data !== undefined) {
         history.push("/my-galleries");
       }
-    } catch (error) {
-      alert(error);
-    }
+    } catch (error) {}
   };
 
   const handleInputChange = (e, index) => {
@@ -38,7 +36,7 @@ export default function CreateGalleryComponent() {
   };
 
   const handleAddClick = () => {
-    setInputList([...inputList, ...inputList]);
+    setInputList([...inputList, +1]);
   };
 
   return (
@@ -76,13 +74,15 @@ export default function CreateGalleryComponent() {
                 <label>Image url</label>
                 <div className="m-1">
                   {inputList.length !== 1 && (
-                    <button
-                      className="btn btn-secondary"
-                      type="button"
-                      onClick={() => handleRemoveClick(index)}
-                    >
-                      Remove
-                    </button>
+                    <div>
+                      <button
+                        className="btn btn-secondary"
+                        type="button"
+                        onClick={() => handleRemoveClick(index)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   )}
                   {inputList.length - 1 === index && (
                     <button

@@ -66,7 +66,6 @@ export default function EditGalleryComponent() {
       getUsersData();
     }
   }, [id]);
-  console.log(usersData);
   return usersData?.id === gallery?.user_id ? (
     <div className="body-signin">
       <div className="form-signin w-100 m-auto">

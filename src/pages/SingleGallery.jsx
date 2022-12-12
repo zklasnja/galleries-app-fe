@@ -49,7 +49,9 @@ export default function SingleGallery() {
             <h1 className="fw-light">{gallery.name}</h1>
             <p className="lead text-muted">{gallery.description}</p>
             <p className="card-text">
-              {first_name} {last_name}
+              <Link to={`/authors/${usersData.id}`}>
+                {first_name} {last_name}
+              </Link>
             </p>
             {gallery?.user_id === usersData.id ? (
               <div className="btn-group">
@@ -87,14 +89,19 @@ export default function SingleGallery() {
           </div>
         </div>
       ))}
+
       <div>
         {commentsData?.map((comment) => (
           <CommentsComponent key={comment.id} {...comment} />
         ))}
       </div>
-      <div>
-        <AddCommentComponent id={id} />
-      </div>
+      {usersData?.first_name ? (
+        <div>
+          <AddCommentComponent id={id} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

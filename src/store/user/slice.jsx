@@ -37,7 +37,6 @@ export const userSlice = createSlice({
       state.created_at = payload.user.created_at;
       state.updated_at = payload.user.updated_at;
       state.token = payload.authorisation.token;
-      console.log(payload);
     },
     setOnlyUser: (state, { payload }) => {
       state.first_name = payload.user.first_name;

@@ -44,7 +44,7 @@ export default function useAuth() {
     }
   };
 
-  const handleGetUserData = async (data) => {
+  const handleGetUserData = async () => {
     try {
       const response = await authService.me();
       dispatch(setOnlyUser(response.data));

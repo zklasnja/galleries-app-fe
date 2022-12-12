@@ -52,11 +52,12 @@ class GalleriesService {
 
   async edit(id, request) {
     try {
-      const newRequest = await this.axiosInstance.patch(
+      const newRequest = await this.axiosInstance.put(
         `edit-gallery/${id}`,
-        {},
+        request,
         this.headers
       );
+      console.log(request);
 
       return newRequest;
     } catch (error) {

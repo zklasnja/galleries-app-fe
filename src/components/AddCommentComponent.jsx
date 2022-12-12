@@ -18,7 +18,8 @@ export default function AddComment({ id }) {
     if (handleAddComment) {
       handleAddComment();
       const response = await Comments.getAll(id);
-      dispatch(getAll(response));
+      dispatch(getAll(response.data));
+      setNewComment({ body: "" });
     }
   };
   return (
@@ -31,6 +32,7 @@ export default function AddComment({ id }) {
               rows="3"
               className="form-control"
               placeholder="Comment"
+              value={newComment.body}
               onChange={(e) =>
                 setNewComment({ ...newComment, body: e.target.value })
               }

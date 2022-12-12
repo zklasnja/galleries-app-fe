@@ -1,5 +1,5 @@
-import CreateGalleryComponent from "../components/AppCreateGalleryComponent";
+import EditGalleryComponent from "../components/EditGalleryComponent";
 
 export default function EditGallery() {
-  return <CreateGalleryComponent />;
+  return <EditGalleryComponent />;
 }

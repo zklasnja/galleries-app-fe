@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Galleries from "../services/Galleries";
 
 export default function CreateGalleryComponent() {
-  const { id } = useParams();
   const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -23,18 +22,6 @@ export default function CreateGalleryComponent() {
       }
     } catch (error) {
       alert(error);
-    }
-  };
-
-  const onEditGallery = (e) => {
-    e.preventDefault();
-
-    const handleEditGallery = async () => {
-      await Galleries.edit(id, { name, description, urls: inputList });
-    };
-    if (handleEditGallery) {
-      handleEditGallery();
-      history.push("/");
     }
   };
 
@@ -64,7 +51,6 @@ export default function CreateGalleryComponent() {
             <input
               type="text"
               className="form-control"
-              value={name}
               onChange={({ target }) => setName(target.value)}
             />
             <label>Name</label>
@@ -74,7 +60,6 @@ export default function CreateGalleryComponent() {
               type="textarea"
               rows="4"
               className="form-control"
-              value={description}
               onChange={({ target }) => setDescription(target.value)}
             ></textarea>
             <label>Description</label>
@@ -114,7 +99,14 @@ export default function CreateGalleryComponent() {
           <button className="w-100 btn btn-lg btn-primary m-1" type="submit">
             Create
           </button>
-          <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+          <Link
+            className="w-100 btn btn-sm btn-warning m-1"
+            type="button"
+            to={"/my-galleries"}
+          >
+            Cancel
+          </Link>
+          <p className="mt-5 mb-3 text-muted">&copy; 2017-2022</p>
         </form>
       </div>
     </div>

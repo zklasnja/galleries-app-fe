@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Galleries from "../services/Galleries";
 
 export default function CreateGalleryComponent() {
+  const { id } = useParams();
   const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -24,6 +25,19 @@ export default function CreateGalleryComponent() {
       alert(error);
     }
   };
+
+  const onEditGallery = (e) => {
+    e.preventDefault();
+
+    const handleEditGallery = async () => {
+      await Galleries.edit(id, { name, description, urls: inputList });
+    };
+    if (handleEditGallery) {
+      handleEditGallery();
+      history.push("/");
+    }
+  };
+
   const handleInputChange = (e, index) => {
     const list = [...inputList];
     list[index] = e.target.value;
@@ -50,6 +64,7 @@ export default function CreateGalleryComponent() {
             <input
               type="text"
               className="form-control"
+              value={name}
               onChange={({ target }) => setName(target.value)}
             />
             <label>Name</label>
@@ -59,6 +74,7 @@ export default function CreateGalleryComponent() {
               type="textarea"
               rows="4"
               className="form-control"
+              value={description}
               onChange={({ target }) => setDescription(target.value)}
             ></textarea>
             <label>Description</label>

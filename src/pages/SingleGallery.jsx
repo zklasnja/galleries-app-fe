@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllComments, getAll } from "../store/comments/slice";
+import { selectUser } from "../store/user/slice";
 import SingleGalleryImage from "../components/SingleGalleryImage";
 import CommentsComponent from "../components/CommentsComponent";
 import AddCommentComponent from "../components/AddCommentComponent";
@@ -11,7 +12,10 @@ import Comments from "../services/Comments";
 export default function SingleGallery() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const commentsData = useSelector(selectAllComments);
+  const usersData = useSelector(selectUser);
   const [gallery, setGallery] = useState([""]);
   const [first_name, setFirst_name] = useState("");
   const [last_name, setLast_name] = useState("");
@@ -25,10 +29,18 @@ export default function SingleGallery() {
     dispatch(getAll(commentsReponse.data));
   };
 
+  const handleDeleteGallery = async (id) => {
+    const choice = window.confirm(
+      "Are you sure you want to delete this gallery?"
+    );
+    if (!choice) return;
+    await Galleries.delete(id);
+    history.push("/my-galleries");
+  };
+
   useEffect(() => {
     handleSingleGallery(id);
   }, [id]);
-
   return (
     <div>
       <section className="py-1 text-center">
@@ -39,6 +51,25 @@ export default function SingleGallery() {
             <p className="card-text">
               {first_name} {last_name}
             </p>
+            {gallery?.user_id === usersData.id ? (
+              <div className="btn-group">
+                <Link
+                  type="button"
+                  className="btn btn-sm btn-outline-secondary"
+                  to={`/edit-gallery/${id}`}
+                >
+                  Edit Gallery
+                </Link>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDeleteGallery(id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

@@ -71,7 +71,7 @@ class GalleriesService {
 
   async delete(id) {
     const request = await this.axiosInstance.delete(
-      `/delete-gallery/${id}`,
+      `/gallery/${id}`,
       this.headers
     );
 

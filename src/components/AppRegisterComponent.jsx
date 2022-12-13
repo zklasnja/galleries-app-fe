@@ -87,12 +87,14 @@ export default function AppRegisterComponent() {
             <label>
               <input
                 type="checkbox"
-                value={userData.terms}
+                checked={userData.terms}
                 onChange={(e) =>
-                  dispatch({
-                    ...userData,
-                    terms: e.target.checked ? e.target.checked : "",
-                  })
+                  dispatch(
+                    toRegister({
+                      ...userData,
+                      terms: e.target.checked ? true : false,
+                    })
+                  )
                 }
               />
               I Accept Terms & Conditions

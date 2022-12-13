@@ -6,7 +6,7 @@ export const userSlice = createSlice({
     first_name: "",
     last_name: "",
     email: "",
-    terms: true,
+    terms: false,
     created_at: "",
     updated_at: "",
     id: "",

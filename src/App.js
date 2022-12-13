@@ -5,13 +5,7 @@ import Navbar from "./pages/Navbar";
 function App() {
   return (
     <div>
-      <header>
-        <nav>
-          <ul>
-            <Navbar />
-          </ul>
-        </nav>
-      </header>
+      <Navbar />
       <Router />
     </div>
   );

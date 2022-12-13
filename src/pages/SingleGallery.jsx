@@ -76,19 +76,15 @@ export default function SingleGallery() {
         </div>
       </section>
 
-      {gallery?.images?.map((image) => (
-        <div key={image.id} className="album py-5 bg-light">
-          <div className="container">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              <div className="col">
-                <div className="card shadow-sm ">
-                  <SingleGalleryImage key={image.id} image={image} />
-                </div>
-              </div>
-            </div>
+      <div className="album py-5 bg-light">
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {gallery?.images?.map((image) => (
+              <SingleGalleryImage key={image.id} image={image} />
+            ))}
           </div>
         </div>
-      ))}
+      </div>
 
       <div>
         {commentsData?.map((comment) => (

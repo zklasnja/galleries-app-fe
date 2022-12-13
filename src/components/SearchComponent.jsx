@@ -13,14 +13,12 @@ export default function CarsSearchComponent() {
   }, 500);
 
   return (
-    <header>
-      <input
-        className="input-text"
-        type="text"
-        placeholder="Search for..."
-        defaultValue={searchTerm}
-        onChange={handleChange}
-      />
-    </header>
+    <input
+      className="input-padding-y position-relative ms-5"
+      type="text"
+      placeholder="Search for..."
+      defaultValue={searchTerm}
+      onChange={handleChange}
+    />
   );
 }

@@ -10,33 +10,24 @@ export default function AppGalleryRow({
   created_at,
 }) {
   return (
-    <main className="container-fluid">
-      <div className="py-3 bg-light">
-        <div className="d-flex justify-content-center">
-          <div className="card mx-auto">
-            <img
-              className="rounded float-left"
-              height="225"
-              alt=""
-              src={images.length ? images[0].urls : ""}
-            />
-            <div className="card-body">
-              <h3 className="fw-light">
-                <Link to={`/gallery/${id}`}>{name}</Link>
-              </h3>
-              <p className="lead text-muted">{description}</p>
-              <p className="card-text">
-                <Link to={`/authors/${user.id}`}>
-                  {user.first_name} {user.last_name}
-                </Link>
-              </p>
-              <div className="d-flex justify-content-between align-items-center">
-                <small className="text-muted">{created_at}</small>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="card shadow-sm m-1" style={{ width: 20 + "rem" }}>
+      <img
+        className="bd-placeholder-img card-img-top"
+        alt=""
+        src={images.length ? images[0].urls : ""}
+      />
+      <div className="card-body">
+        <h3 className="fw-light">
+          <Link to={`/gallery/${id}`}>{name}</Link>
+        </h3>
+        <p className="card-text">{description}</p>
+        <p className="card-text">
+          <Link to={`/authors/${user.id}`}>
+            {user.first_name} {user.last_name}
+          </Link>
+        </p>
+        <small className="">{created_at}</small>
       </div>
-    </main>
+    </div>
   );
 }

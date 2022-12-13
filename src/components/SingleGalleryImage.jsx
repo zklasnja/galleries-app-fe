@@ -3,7 +3,6 @@ import React from "react";
 export default function SingleGalleryImage({ image }) {
   return (
     <img
-      className="img-responsive"
       width="100%"
       height="225"
       src={image.urls}

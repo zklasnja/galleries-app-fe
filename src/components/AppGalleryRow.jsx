@@ -26,7 +26,7 @@ export default function AppGalleryRow({
             {user.first_name} {user.last_name}
           </Link>
         </p>
-        <small className="">{created_at}</small>
+        <small className="">{new Date(created_at).toLocaleString()}</small>
       </div>
     </div>
   );

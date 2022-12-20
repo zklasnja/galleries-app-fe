@@ -8,6 +8,7 @@ import CommentsComponent from "../components/CommentsComponent";
 import AddCommentComponent from "../components/AddCommentComponent";
 import Galleries from "../services/Galleries";
 import Comments from "../services/Comments";
+import { format, parseISO } from "date-fns";
 
 export default function SingleGallery() {
   const { id } = useParams();
@@ -53,6 +54,9 @@ export default function SingleGallery() {
                 {first_name} {last_name}
               </Link>
             </p>
+            <small className="">
+              {new Date(gallery?.created_at).toLocaleString()}
+            </small>
             {gallery?.user_id === usersData.id ? (
               <div className="btn-group">
                 <Link
